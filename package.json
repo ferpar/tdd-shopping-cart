@@ -1,0 +1,14 @@
+{
+  "name": "ultimateworkflow",
+  "version": "1.0.0",
+  "description": "Learning a TDD workflow",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Fernando Perez de Ayala",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^25.1.0"
+  }
+}
