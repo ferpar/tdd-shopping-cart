@@ -9,7 +9,7 @@ function makeCartDb () {
       if (!map.has(item.id)) {
         throw Error('No such item')
       }
-      return map.set(item.od, { ...map.get(item.id), ...item})
+      return map.set(item.id, { ...map.get(item.id), ...item})
     }
   })
 }
