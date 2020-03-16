@@ -26,7 +26,38 @@ describe('shopping-cart', () => {
     await cart.update(newItem)
     expect(await cart.getItems()).toContainEqual(newItem)
   })
-  it.todo('lists items')
-  it.todo('calculates a subtotal price')
+  it('lists items', async () => {
+    const item1 = { id: '34', name: 'Codemaster 4000', price: 2999, quantity: 2 }
+    const item2 = { id: '35', name: 'ThrustCoder 40k', price: 3999, quantity: 4 }
+    const item3 = { id: '36', name: 'HackaMole 20000', price: 10000, quantity: 2 }
+    
+    await cart.add(item1)
+    await cart.add(item2)
+    await cart.add(item3)
+
+    const list = await cart.getItems()
+
+    expect(Array.isArray(list)).toBe(true)
+    expect(list).toEqual([item1, item2, item3])
+
+  })
+  it('calculates a subtotal price', async () => {
+    const item1 = { id: '34', name: 'Codemaster 4000', price: 2999, quantity: 2 }
+    const item2 = { id: '35', name: 'ThrustCoder 40k', price: 3999, quantity: 4 }
+    const item3 = { id: '36', name: 'HackaMole 20000', price: 10000, quantity: 2 }
+    
+    await cart.add(item1)
+    await cart.add(item2)
+    await cart.add(item3)
+
+    const expectedPrice = [item1,item2,item3].reduce(
+      (ac,item) => { return ac += item.price*item.quantity }
+      , 0)
+
+    const calculatedPrice = await cart.subtotal()
+
+    expect(calculatedPrice).toEqual(expectedPrice)
+  
+  })
 
 })

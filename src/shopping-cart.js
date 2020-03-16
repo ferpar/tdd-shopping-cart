@@ -3,7 +3,8 @@ function makeShoppingCart ({ db }) {
     add,
     getItems,
     remove,
-    update
+    update,
+    subtotal
   })
 
   async function add(item){
@@ -22,6 +23,13 @@ function makeShoppingCart ({ db }) {
     return db.update(item)
   }
 
+  async function subtotal() {
+    const list = await db.list()
+    const subtotal = list.reduce(
+      (total, item) => total+= item.price * item.quantity, 0)
+
+    return subtotal
+  }
 }
 
 module.exports = makeShoppingCart
